@@ -64,3 +64,13 @@ function nextQuestion(){
 
 startButton.addEventListener("click", startQuiz)
 button1.addEventListener("click", nextQuestion)
+
+
+
+
+
+
+
+
+
+
