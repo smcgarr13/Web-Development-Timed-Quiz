@@ -23,6 +23,8 @@
         <a href="TBD">View High Scores</a>
         <!-- <div class="topcorner"><a href="TBD">timer</a></div> -->
         <!-- <p class="topcorner" id="timer"></p> -->
+        <div id="start-div">
+
         <header>
           <h1>Coding Quiz Challenge</h1>
         </header>
@@ -36,12 +38,28 @@
               placeholder="Initials - Score"
               aria-label="New High Score"
             ></textarea> -->
-          </div>
+            
           <div class="card-footer">
-            <p>Time: <span class="js-timeout">2:00</span></p>
             <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
             <button id="quiz-button" class="btn">Start Quiz</button>
           </div>
+        </div>
+        <div class="hidden" id="question-div">
+            <header>
+            <h1 id="question">Question Placeholder</h1>
+        </header>   
+            <button class="btn" id="choice1" value="1">A</button>
+            <button class="btn" id="choice2" value="2">B</button>
+            <button class="btn" id="choice3" value="3">C</button>
+            <button class="btn" id="choice4" value="4">D</button>
+        </div>
+          <div class="card-footer">
+            <p>Time: <span class="js-timeout">1:30</span></p>
+            <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
+           
+          </div>
+
+          
         </div>
       </div>
     </div>

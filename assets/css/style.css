@@ -84,6 +84,9 @@ padding: 0px 50px;
   background: #c0c7cf;
 } */
 
+.hidden{
+    display: none;
+}
 
 /*referenced: https://stackoverflow.com/questions/14231329/ */
 .card-footer p {

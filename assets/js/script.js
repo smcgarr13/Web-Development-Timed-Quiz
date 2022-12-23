@@ -1,12 +1,30 @@
 
 // Timer
 // referenced: https://codepen.io/TLJens/pen/azedap
+var startButton = document.querySelector("#quiz-button")
+var startDiv = document.querySelector("#start-div")
+var questionDiv = document.querySelector("#question-div")
+var questionEl = document.querySelector("#question")
+var button1 = document.querySelector("#choice1")
+var button2 = document.querySelector("#choice2")
+var button3 = document.querySelector("#choice3")
+var button4 = document.querySelector("#choice4")
 var interval;
+var questionCounter = 0
+
+var questions = [
+    {
+        question: "Commonly used data types Do Not Include: ",
+        choices: ["a", "b", "c", "d"],
+        answer: "a" //if a sentence would have to be exactly the same as what's noted in choices
+    }
+]
 
 function countdown() {
-  clearInterval(interval);
-  interval = setInterval( function() {
-      var timer = $('.js-timeout').html();
+    clearInterval(interval);
+    interval = setInterval( function() {
+    var timeEl = document.querySelector('.js-timeout');
+    var timer = timeEl.innerHTML;
       timer = timer.split(':');
       var minutes = timer[0];
       var seconds = timer[1];
@@ -18,21 +36,34 @@ function countdown() {
       }
       else if (seconds < 10 && length.seconds != 2) seconds = '0' + seconds;
 
-      $('.js-timeout').html(minutes + ':' + seconds);
+      timeEl.innerHTML = (minutes + ':' + seconds);
 
       if (minutes == 0 && seconds == 0) clearInterval(interval);
   }, 1000);
 }
 
-$('#btn').click(function () {
-  $('.js-timeout').text("2:00");
-  countdown();
-});
+// Event Listener
+function startQuiz(){
+    countdown() 
+    startDiv.classList.add("hidden");
+    questionDiv.classList.remove("hidden");
+    questionEl.textContent = questions[questionCounter].question
+    button1.textContent = questions[questionCounter].choices[0]
+    button2.textContent = questions[questionCounter].choices[1]
+    button3.textContent = questions[questionCounter].choices[2]
+    button4.textContent = questions[questionCounter].choices[3]
+}
+function nextQuestion(){
+    questionCounter++
+    questionEl.textContent = questions[questionCounter].question
+    button1.textContent = questions[questionCounter].choices[0]
+    button2.textContent = questions[questionCounter].choices[1]
+    button3.textContent = questions[questionCounter].choices[2]
+    button4.textContent = questions[questionCounter].choices[3]
+}
 
-// $('#js-resetTimer').click(function () {
-//   $('.js-timeout').text("2:00");
-//   clearInterval(interval);
-// });
+startButton.addEventListener("click", startQuiz)
+button1.addEventListener("click", nextQuestion)
 
 
 
@@ -42,35 +73,4 @@ $('#btn').click(function () {
 
 
 
-// // referenced: https://www.w3schools.com/howto/howto_js_countdown.asp
-// // Set the date we're counting down to
-// // var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-// var countDownTime = new Time("0").getTime();
 
-// // Update the count down every 1 second
-// var x = setInterval(function() {
-
-//   // Get today's date and time
-// //   var now = new Date().getTime();
-// var now = new Time().getTime();
-
-//   // Find the distance between now and the count down date
-//   var distance = countDownTime - now;
-
-//   // Time calculations for days, hours, minutes and seconds
-// //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-// //   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-// //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-//   // Display the result in the element with id="demo"
-// //   document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-// //   + minutes + "m " + seconds + "s ";
-// document.getElementById("timer").innerHTML = seconds + "s ";
-
-//   // If the count down is finished, write some text
-//   if (distance < 0) {
-//     clearInterval(x);
-//     document.getElementById("timer").innerHTML = "EXPIRED";
-//   }
-// }, 1000);
