@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Quiz | Web Development Basics</title>
+    <link rel="stylesheet" media="max-width: 1118px" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Questrial&family=Quicksand&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Koulen&family=Lexend+Exa:wght@500&display=swap">
+</head>
+<body>
+  <div class="card">
+    <div class="wrapper">
+        
+        <!-- Display the countdown timer in an element -->
+        <!-- https://www.w3schools.com/howto/howto_js_countdown.asp -->
+
+        <a href="TBD">View High Scores</a>
+        <!-- <div class="topcorner"><a href="TBD">timer</a></div> -->
+        <!-- <p class="topcorner" id="timer"></p> -->
+        <div id="start-div">
+
+        <header>
+          <h1>Coding Quiz Challenge</h1>
+        </header>
+        <div>
+            <p>Do your best to answer the following code-related questions within the given time.  Any incorrect answers will result in a 10 second penalty.</p>
+          </div>
+          <!-- <div class="card-body">
+            <textarea
+              readonly
+              id="High Score"
+              placeholder="Initials - Score"
+              aria-label="New High Score"
+            ></textarea> -->
+          <div class="card-footer">
+            <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
+            <button id="quiz-button" class="btn">Start Quiz</button>
+          </div>
+        </div>
+        <div class="hidden" id="question-div">
+            <header>
+              <h1 id="question">Question Placeholder</h1>
+            </header> 
+            <div class="flexbox-container">
+              <button class="btn" id="choiceA" value="A">A</button>
+              <button class="btn" id="choiceB" value="B">B</button>
+              <button class="btn" id="choiceC" value="C">C</button>
+              <button class="btn" id="choiceD" value="D">D</button>
+            </div>
+            <div id="answerCheck">
+              <p>Correct or Incorrect</p>
+            </div>
+            <div id="end">
+              <!-- <p>Game Over | Final Score</p> -->
+            </div>
+            <div id="scoreContainer" style="display : none;"></div>  
+        </div>
+          <div class="card-footer">
+            <p>Time: <span class="js-timeout">1:30</span></p>
+            <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
+          </div>
+    </div>
+  </div>
+
+<script src="assets/js/script.js"></script>    
+</body>
+</html>
+
