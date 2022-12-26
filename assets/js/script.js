@@ -291,5 +291,3 @@ buttonA.addEventListener("click", nextQuestion)
 buttonB.addEventListener("click", nextQuestion)
 buttonC.addEventListener("click", nextQuestion)
 buttonD.addEventListener("click", nextQuestion)
-
-
