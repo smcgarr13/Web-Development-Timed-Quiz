@@ -10,17 +10,33 @@ var buttonC = document.querySelector("#choiceC")
 var buttonD = document.querySelector("#choiceD")
 var answerCheck = document.querySelector("#answerCheck")
 var scoreDiv = document.querySelector("#scoreContainer")
-var end = document.querySelector("#end")
+
 var interval;
 var questionCounter = 0;
+
 var choices = ['buttonA', 'buttonB', 'buttonC', 'buttonD'];
 
+var end = document.querySelector("#end")
+var scoreContainer = document.querySelector("#scoreContainer")
+var highScores = document.querySelector("#highScores")
+
+// is this right???
+var highScores = document.querySelector("#Initials-Score") 
+// or would it be
+var initials = "";
+var score = "";
+
+var goBackButton = document.querySelector("#goBack")
+var clearHighScoresButton = document.querySelector("#clearHighScores")
+var submitButton = document.querySelector("#submit")
+var submitButton = document.querySelector("#submit")
+var finalScore = "";
 // Declare the "score" variable
 // referenced: https://stackoverflow.com/questions/54506852/how-to-calculate-a-percentage-score-for-a-quiz-in-javascript
 var score = 0;
 var answer = "";
 // var userAnswer = "";
-var answered = 0; 
+var answered = 0;
 
 
 // let acceptingAnswers = false
@@ -178,10 +194,6 @@ function checkAnswer () {
 //     }
 // }
 
-
-
-
-
 // function compareAnswer(event) {
 //     if (userAnswer >= questions.length) {
 //         clearInterval;
@@ -286,8 +298,15 @@ function scoreRender() {
 }	
 
 // Event Listener
+var clearScores = "";
+
 startButton.addEventListener("click", startQuiz)
 buttonA.addEventListener("click", nextQuestion)
 buttonB.addEventListener("click", nextQuestion)
 buttonC.addEventListener("click", nextQuestion)
 buttonD.addEventListener("click", nextQuestion)
+
+goBackButton.addEventListener("click", startQuiz)
+clearHighScoresButton.addEventListener("click", clearScores)
+submitButton.addEventListener("click", finalScore)
+
