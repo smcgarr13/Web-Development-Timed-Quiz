@@ -55,13 +55,20 @@
             <section class="hidden" id="answerCheck">
               <p>Correct or Incorrect</p>
             </section>
+            <!-- Game Over Slide/Page -->
             <section class="hidden" id="end">
                 <h1>Game Over!</h1>
                 <p>Your Final Score:</p>
-                <p>Enter Initials:</p>
+                <!-- <p>Enter Initials:</p> -->
+                <!-- referenced: 22-Stu_Local-Storage Lesson/Code -->
+                <form method="POST">
+                  <div class="input-group">
+                    <label for="initials">Enter Your Intials: </label>
+                    <input type="text" name="initials" id="initials" placeholder="your initials" />
+                  </div>
                 <button class="btn" id="submit">Submit</button>
             </section>
-            
+               <!-- High Score Slide/Page -->
             <section class="hidden" id="scoreContainer">
               <header>
                 <h1 id="highScores">High Scores</h1>

@@ -23,22 +23,23 @@ var highScores = document.querySelector("#highScores")
 // is this right???
 var highScores = document.querySelector("#Initials-Score") 
 // or would it be
-var initials = "";
-var score = "";
+var initials = document.querySelector("#initials") 
+var score = 0;
 
 var goBackButton = document.querySelector("#goBack")
 var clearHighScoresButton = document.querySelector("#clearHighScores")
 var submitButton = document.querySelector("#submit")
-var submitButton = document.querySelector("#submit")
 var finalScore = "";
+
+var timeEl = document.querySelector('.js-timeout')
+var timer = timeEl.innerHTML;
+var minutes = timer[0];
+var seconds = timer[1];
+
 // Declare the "score" variable
 // referenced: https://stackoverflow.com/questions/54506852/how-to-calculate-a-percentage-score-for-a-quiz-in-javascript
-var score = 0;
-var answer = "";
-// var userAnswer = "";
-var answered = 0;
 
-
+// var answer = "";
 // let acceptingAnswers = false
 
 // Questions
@@ -69,31 +70,33 @@ let questions = [
 
 // Timer
 // referenced: https://codepen.io/TLJens/pen/azedap
-var questionIndex = 0
 
 function countdown() {
     clearInterval(interval);
     interval = setInterval( function() {
-    var timeEl = document.querySelector('.js-timeout')
-    var timer = timeEl.innerHTML;
+    // var timeEl = document.querySelector('.js-timeout')
+    timer = timeEl.innerHTML;
       timer = timer.split(':');
-      var minutes = timer[0];
-      var seconds = timer[1];
+      minutes = timer[0];
+      seconds = timer[1];
       seconds -= 1;
+      score = seconds + 60;
       if (minutes < 0) return;
       else if (seconds < 0 && minutes != 0) {
           minutes -= 1;
           seconds = 59;
+          score = seconds;
       }
-      else if (seconds < 10 && length.seconds != 2) seconds = '0' + seconds;
-
+      else if (seconds < 10 && length.seconds != 2) {
+        seconds = '0' + seconds;
+        score = seconds;
+      } 
       timeEl.innerHTML = (minutes + ':' + seconds);
       if (minutes == 0 && seconds == 0) clearInterval(interval);
-      // alert("Time is up. Game Over");
   }, 1000);
 }
 
-// Button Functions
+// Answer Button Functions (for questions)
 function startQuiz(){
     console.log("Button Works!!")
     countdown() 
@@ -113,18 +116,22 @@ const maxQuestions = questions.length;
 
 // const selectedAnswer = selectedChoice.dataset["number"];
 
-function nextQuestion(){
-    if (questions.length == 0 || questionCounter >= questions.length ) {
-        return window.location.assign("/end.html");
-    }
-    // availableQuestions = [...questions];
+function nextQuestion(event){
     questionCounter++;
+    if (questionCounter == questions.length) {
+     gameOver();
+     return
+    }
+   
     questionEl.textContent = questions[questionCounter].question
     buttonA.textContent = questions[questionCounter].choices[0]
     buttonB.textContent = questions[questionCounter].choices[1]
     buttonC.textContent = questions[questionCounter].choices[2]
     buttonD.textContent = questions[questionCounter].choices[3]
-    console.log(userAnswer.coices == questions.correctAnswer)
+    console.log(event.target.textContent == questions[questionCounter].answer)
+    if(event.target.textContent !== questions[questionCounter].answer) {
+        seconds -= 10;
+     }
 }
 // if (userAnswer.correct) {
 //     choices.dataset.correct = userAnswer.correct
@@ -135,23 +142,23 @@ function nextQuestion(){
 // referenced: https://www.youtube.com/watch?v=49pYIMygIcU
 // function checkAnswer(correctAnswer) {
 
-var userAnswer = "";
+// var userAnswer = "";
 
-function checkAnswer () {
-    if (userAnswer == answer){
-        // correct
-        alert ("correct, hooray!!")
-        score++; 
-    }else{
-        // incorrect
-        // deduct 10 secs from timer 
-        alert ("incorrect, bummer!!")
-        (timeEl) - 10;
-        // end quiz & share score
-        clearInterval;
-        scoreRender();
-    }
-}
+// function checkAnswer () {
+//     if (userAnswer == answer){
+//         // correct
+//         alert ("correct, hooray!!")
+//         score++; 
+//     }else{
+//         // incorrect
+//         // deduct 10 secs from timer 
+//         alert ("incorrect, bummer!!")
+//         (timeEl) - 10;
+//         // end quiz & share score
+//         clearInterval;
+//         scoreRender();
+//     }
+// }
 
 // function checkAnswer (answer) {
 //     if (answer === questions[runningQuestion].correctAnswer){
@@ -276,29 +283,59 @@ function checkAnswer () {
 // }
 
 // Game Over function
+function gameOver() {
+    end.classList.remove("hidden");
+    questionDiv.classList.add("hidden");
+    clearInterval(interval)
+}
 
-// stop() {
+// High Score
 
-//  }
+function highScores() {
+    scoreDiv.classList.remove("hidden");
+    end.classList.add("hidden");
+    questionDiv.classList.add("hidden");
+    clearInterval(interval)
+}
+// function scoreRender() {
+//     scoreContainer.style.display = "block";
+//     let scorePercent = Math.round(100 * score / questions.length);
+//     scoreContainer.innerHTML = "<h1>" + scorePercent + "%<h1>";
+// }	
 
-// function gameOver() {
-//     if (questions == questions.length);
-//     return "Score"
-//     };
-//     {
-//     if (questions != questions.length);
-//     return "Game Over!"
-// };
 
-// Score
-function scoreRender() {
-    scoreContainer.style.display = "block";
-    let scorePercent = Math.round(100 * score / questions.length);
-    scoreContainer.innerHTML = "<h1>" + scorePercent + "%<h1>";
-}	
+// Initials and score saved to local storage
+// referenced: 22-Stu_Local-Storage Lesson/Code
+// function renderLastRegistered() {
+// var initials = localStorage.getItem("initials");
+// var lastScore = localStorage.getItem("score");
+// userEmailSpan.textContent = lastEmail;
+// userPasswordSpan.textContent = lastScore;
+// }
+
+// submitButton.addEventListener("click", function(event) {
+//   event.preventDefault();
+
+//   var initials = document.querySelector("#initials").value;
+// //   var finalScore = document.querySelector("#finalScore").value;
+
+//   if (initials === "") {
+//     displayMessage("error", "Initials cannot be blank");
+// //   } else if (password === "") {
+// //     displayMessage("error", "Password cannot be blank");
+//   } else {
+//     displayMessage("success", "Registered successfully");
+
+//   // Save initials and final score to localStorage and render the last registered user
+//   localStorage.setItem("initials", initials);
+//   localStorage.setItem("finalScore", finalScore);renderLastRegistered()
+//   }
+// });
+
+
 
 // Event Listener
-var clearScores = "";
+// var clearScores = "";
 
 startButton.addEventListener("click", startQuiz)
 buttonA.addEventListener("click", nextQuestion)
@@ -306,7 +343,18 @@ buttonB.addEventListener("click", nextQuestion)
 buttonC.addEventListener("click", nextQuestion)
 buttonD.addEventListener("click", nextQuestion)
 
-goBackButton.addEventListener("click", startQuiz)
-clearHighScoresButton.addEventListener("click", clearScores)
-submitButton.addEventListener("click", finalScore)
+// goBackButton.addEventListener("click", startQuiz)
+// clearHighScoresButton.addEventListener("click", clearScores)
+submitButton.addEventListener("click", saveScore)
 
+function saveScore() {
+    console.log(score)
+var data = {
+    initials:initials.value,
+    score:score
+} 
+highScores.push(data)
+localStorage.setItem("highScores", JSON.stringify(highScores))
+}
+
+var highScores = JSON.parse(localStorage.getItem("highScores"))||[]
