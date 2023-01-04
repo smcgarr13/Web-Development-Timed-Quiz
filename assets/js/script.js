@@ -8,8 +8,8 @@ var buttonA = document.querySelector("#choiceA")
 var buttonB = document.querySelector("#choiceB")
 var buttonC = document.querySelector("#choiceC")
 var buttonD = document.querySelector("#choiceD")
-var answerCheck = document.querySelector("#answerCheck")
-var scoreDiv = document.querySelector("#scoreContainer")
+// var answerCheck = document.querySelector("#answerCheck")
+// var scoreDiv = document.querySelector("#scoreContainer")
 
 var interval;
 var questionCounter = 0;
@@ -19,11 +19,13 @@ var choices = ['buttonA', 'buttonB', 'buttonC', 'buttonD'];
 var end = document.querySelector("#end")
 var scoreContainer = document.querySelector("#scoreContainer")
 var highScores = document.querySelector("#highScores")
+var initials = document.querySelector("#userScore")
+var finalUserScore = document.querySelector("#finalScore")
 
 // is this right???
-var highScores = document.querySelector("#Initials-Score") 
+// var highScores = document.querySelector("#Initials-Score") 
 // or would it be
-var initials = document.querySelector("#initials") 
+// var initials = document.querySelector("#initials") 
 var score = 0;
 
 var goBackButton = document.querySelector("#goBack")
@@ -34,13 +36,10 @@ var finalScore = "";
 var timeEl = document.querySelector('.js-timeout')
 var timer = timeEl.innerHTML;
 var minutes = timer[0];
-var seconds = timer[1];
+var seconds = 30;
 
-// Declare the "score" variable
-// referenced: https://stackoverflow.com/questions/54506852/how-to-calculate-a-percentage-score-for-a-quiz-in-javascript
+var scoreList = document.querySelector("#scoreList")
 
-// var answer = "";
-// let acceptingAnswers = false
 
 // Questions
 let questions = [
@@ -75,10 +74,11 @@ function countdown() {
     clearInterval(interval);
     interval = setInterval( function() {
     // var timeEl = document.querySelector('.js-timeout')
+    console.log(seconds)
     timer = timeEl.innerHTML;
       timer = timer.split(':');
       minutes = timer[0];
-      seconds = timer[1];
+    //   seconds = timer[1];
       seconds -= 1;
       score = seconds + 60;
       if (minutes < 0) return;
@@ -109,200 +109,72 @@ function startQuiz(){
     buttonD.textContent = questions[questionCounter].choices[3]
 }
 // referenced: https://www.youtube.com/watch?v=_LYxkClHnV0&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=6
-const maxQuestions = questions.length;
-// const selectedChoice = [];
-// const userAnswer = ("click", choices);
-// const Correct = userAnswer.dataset.correctAnswer
-
-// const selectedAnswer = selectedChoice.dataset["number"];
 
 function nextQuestion(event){
+  
+    console.log(event.target.textContent == questions[questionCounter].answer)
+    if(event.target.textContent !== questions[questionCounter].answer) {
+    seconds -= 10;
+     }
+     
     questionCounter++;
     if (questionCounter == questions.length) {
-     gameOver();
-     return
-    }
-   
+        gameOver();
+        return
+       }
     questionEl.textContent = questions[questionCounter].question
     buttonA.textContent = questions[questionCounter].choices[0]
     buttonB.textContent = questions[questionCounter].choices[1]
     buttonC.textContent = questions[questionCounter].choices[2]
     buttonD.textContent = questions[questionCounter].choices[3]
-    console.log(event.target.textContent == questions[questionCounter].answer)
-    if(event.target.textContent !== questions[questionCounter].answer) {
-        seconds -= 10;
-     }
 }
-// if (userAnswer.correct) {
-//     choices.dataset.correct = userAnswer.correct
-//     }
 
 // Check Answers
 // referenced: https://codereview.stackexchange.com/questions/119804/answer-checking-script
 // referenced: https://www.youtube.com/watch?v=49pYIMygIcU
-// function checkAnswer(correctAnswer) {
-
-// var userAnswer = "";
-
-// function checkAnswer () {
-//     if (userAnswer == answer){
-//         // correct
-//         alert ("correct, hooray!!")
-//         score++; 
-//     }else{
-//         // incorrect
-//         // deduct 10 secs from timer 
-//         alert ("incorrect, bummer!!")
-//         (timeEl) - 10;
-//         // end quiz & share score
-//         clearInterval;
-//         scoreRender();
-//     }
-// }
-
-// function checkAnswer (answer) {
-//     if (answer === questions[runningQuestion].correctAnswer){
-//         // correct
-//         score++; 
-//     }else{
-//         // incorrect
-//         // deduct 10 secs from timer 
-//     // }else{
-//     //     // end quiz & share score
-//     //     clearInterval;
-//     //     scoreRender();
-//     }
-// }
 
 
-//     // var lineBreak = document.getElementById("lineBreak");
-//     // lineBreak.style.display = "block";
-//     // answerCheck.style.display = "block";
-
-//     if (questions.userAnswer === questions.choices[correctAnswer]) {
-//         // correct answer, add 1 score to final score
-//         correctAnswer++;
-//         // console.log(correctAns);
-//         answerCheck.textContent = "Correct!";
-//     } else {
-//         // wrong answer, deduct 10 second from timer
-//         totalTime -= 10;
-//         timeEl.textContent = totalTime;
-//         answerCheck.textContent = "Wrong! The correct answer is: " + questions.correctAnswer;
-//     }
-
-//     questionIndex++;
-//     // repeat with the rest of questions 
-//     if (questionIndex < questions.length) {
-//         nextQuestion();
-//     } else {
-//         // if no more question, run game over function
-//         gameOver();
-//     }
-// }
-
-// function compareAnswer(event) {
-//     if (userAnswer >= questions.length) {
-//         clearInterval;
-//     } else {
-//     if (event === questions.answer) {
-//         feedback1.textContent = "Correct!";
-//     } else {
-//         timeEl -= 10;
-//         feedback1.textContent = "ooooo, you missed that one...Bummer!";
-//     }
-//     score = timeEl;
-//     questions();
-//     }
-// }
-
-// var userAnswer = "";
-
-// function checkAnswer (correctAnswer) {
-// if (userAnswer === correctAnswer) {
-//     console.log("Correct!")
-// }
-// if (userAnswer !== correctAnswer){
-//     console.log("ooooo, you missed that one...Bummer!")
-    
-//     }
-// }
-
-// const loadquestion = () => {
-//     //console.log('working!!!')
-//     //GETTING THE CORRECT ANSWER //
-//     answer = (questions[questionCounter].answer)
-//     console.log(correctAnswer)
-//     //RESET CLICK WHEN CLICKED OUTSIDE
-//     const clickreset = (e) => {
-//       if (e.target !== quizbox) {
-//         // console.log(answer1.checked)
-//         choices0.checked = false
-//         choices1.checked = false
-//         choices2.checked = false
-//         choices3.checked = false
-//       } else {}
-//     }
-// }
-
-// let lastQuestionIndex = questions.length - 1;
-// let runningQuestionIndex = 0;
-
-// function renderQuestion() {
-//     let q = questions[runningQuestionIndex];
-//     question.innerHTML = "<h1>" + q.question + "<h1>";
-//     choiceA.innerHTML = q.choiceA;
-//     choiceB.innerHTML = q.choiceB;
-//     choiceC.innerHTML = q.choiceC;
-//     choiceD.innerHTML = q.choiceD;
-// }
-
-// function checkAnswer(answer) {
-//     if (questions(answer, correctAnswer)) {
-//         alert("Correct!");
-//     } else {
-//         alert("Bummer!");
-//   }
-// };
-
-// function checkAnswers(correctAnswers) {
-
-//     //You could also just use a standard for-loop for this
-//     correctAnswers.forEach(function(correctAnswer, i) {
-//         //Note unless you check prevent i from being appended when i == 1,
-//         // your first answer ID will be "answer1" instead of "answer"
-//         var answer = document.getElementById("answer" + (i + 1)).value;
-
-//         if (answerIsCorrect(answer, correctAnswer)) {
-//             alert("Correct!");
-
-//         } else {
-//             alert("Bummer!");
-//         }
-//     });
-// }
 
 // Game Over function
 function gameOver() {
     end.classList.remove("hidden");
     questionDiv.classList.add("hidden");
-    clearInterval(interval)
+    clearInterval(interval);
+    finalUserScore.textContent = score;
+    // if (submitButton.event + "click") {
+    //     highScores();
+    // }
 }
 
 // High Score
+// function saveScore(event){
+//     var data = {
+//         initials: initials,
+//         score: score
+//     }
+//     highScores.push(data)
+//     localStorage.setItem("highScores", JSON.stringify(highScores))
+// } 
 
-function highScores() {
-    scoreDiv.classList.remove("hidden");
+// var highScores = []
+
+
+
+
+
+function highScores(){
+    if (submitButton.event)
+    // console.log("Button Works!!")
+    // countdown() 
     end.classList.add("hidden");
-    questionDiv.classList.add("hidden");
-    clearInterval(interval)
+    scoreContainer.classList.remove("hidden");
 }
-// function scoreRender() {
-//     scoreContainer.style.display = "block";
-//     let scorePercent = Math.round(100 * score / questions.length);
-//     scoreContainer.innerHTML = "<h1>" + scorePercent + "%<h1>";
-// }	
 
+// function highScores() {
+//     scoreContainer.classList.remove("hidden");
+    // end.classList.add("hidden");
+    // questionDiv.classList.add("hidden");
+// };
 
 // Initials and score saved to local storage
 // referenced: 22-Stu_Local-Storage Lesson/Code
@@ -333,7 +205,6 @@ function highScores() {
 // });
 
 
-
 // Event Listener
 // var clearScores = "";
 
@@ -353,8 +224,18 @@ var data = {
     initials:initials.value,
     score:score
 } 
-highScores.push(data)
-localStorage.setItem("highScores", JSON.stringify(highScores))
+userScore.push(data)
+localStorage.setItem("userScore", JSON.stringify(userScore))
+scoreContainer.classList.remove("hidden");
+end.classList.add("hidden");
+questionDiv.classList.add("hidden");
+for (let i = 0; i < userScore.length; i++) {
+   var li = document.createElement("li") 
+    li.textContent = userScore[i].initials + ": " + userScore[i].score
+    scoreList.appendChild(li)
+    }
 }
 
-var highScores = JSON.parse(localStorage.getItem("highScores"))||[]
+var userScore = JSON.parse(localStorage.getItem("userScore"))||[]
+
+
