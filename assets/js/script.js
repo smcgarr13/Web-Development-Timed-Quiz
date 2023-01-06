@@ -19,7 +19,9 @@ var choices = ['buttonA', 'buttonB', 'buttonC', 'buttonD'];
 var end = document.querySelector("#end")
 var scoreContainer = document.querySelector("#scoreContainer")
 var highScores = document.querySelector("#highScores")
-var initials = document.querySelector("#userScore")
+// var initials = document.querySelector("#userScore")
+var userScore = document.querySelector("#userScore")
+var initials = document.querySelector("#initials")
 var finalUserScore = document.querySelector("#finalScore")
 
 // is this right???
@@ -46,7 +48,7 @@ let questions = [
     {
         question: "Commonly used data types Do Not Include: ",
         choices: ["A. strings", "B. booleans", "C. alerts", "D. numbers"],
-        answer: "C. alerts" //if a sentence would have to be exactly the same as what's noted in choices
+        answer: "B. booleans" //if a sentence would have to be exactly the same as what's noted in choices
         // choices: ["a", "b", "c", "d"],
         // answer: "a" //if a sentence would have to be exactly the same as what's noted in choices]
     },
@@ -220,6 +222,7 @@ submitButton.addEventListener("click", saveScore)
 
 function saveScore() {
     console.log(score)
+    console.log(initials)
 var data = {
     initials:initials.value,
     score:score
