@@ -8,24 +8,16 @@ var buttonA = document.querySelector("#choiceA")
 var buttonB = document.querySelector("#choiceB")
 var buttonC = document.querySelector("#choiceC")
 var buttonD = document.querySelector("#choiceD")
-// var answerCheck = document.querySelector("#answerCheck")
-// var scoreDiv = document.querySelector("#scoreContainer")
 
-var interval;
 var questionCounter = 0;
-
 var choices = ['buttonA', 'buttonB', 'buttonC', 'buttonD'];
 
 var end = document.querySelector("#end")
 var scoreContainer = document.querySelector("#scoreContainer")
 var highScores = document.querySelector("#highScores")
-var initials = document.querySelector("#userScore")
+var userScore = document.querySelector("#userScore")
+var initials = document.querySelector("#initials")
 var finalUserScore = document.querySelector("#finalScore")
-
-// is this right???
-// var highScores = document.querySelector("#Initials-Score") 
-// or would it be
-// var initials = document.querySelector("#initials") 
 var score = 0;
 
 var goBackButton = document.querySelector("#goBack")
@@ -37,6 +29,7 @@ var timeEl = document.querySelector('.js-timeout')
 var timer = timeEl.innerHTML;
 var minutes = timer[0];
 var seconds = 30;
+var interval;
 
 var scoreList = document.querySelector("#scoreList")
 
@@ -46,9 +39,7 @@ let questions = [
     {
         question: "Commonly used data types Do Not Include: ",
         choices: ["A. strings", "B. booleans", "C. alerts", "D. numbers"],
-        answer: "C. alerts" //if a sentence would have to be exactly the same as what's noted in choices
-        // choices: ["a", "b", "c", "d"],
-        // answer: "a" //if a sentence would have to be exactly the same as what's noted in choices]
+        answer: "C. alerts"
     },
     {
         question: "The condition in an if/else statement is enclosed with ________.",
@@ -64,6 +55,11 @@ let questions = [
         question: "String values must be enclosed within  ________ when being assigned variables.",
         choices: ["A. commas", "B. curly brackets", "C. quotes", "D. parenthesis"],
         answer: "C. quotes"
+    },
+    {
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        choices: ["A. JavaScript", "B. terminal/bash", "C. for loops", "D. console.log"],
+        answer: "C. for loops"
     }
 ];
 
@@ -91,13 +87,13 @@ function countdown() {
         seconds = '0' + seconds;
         score = seconds;
       } 
-      timeEl.innerHTML = (minutes + ':' + seconds);
-      if (minutes == 0 && seconds == 0) clearInterval(interval);
+    timeEl.innerHTML = (minutes + ':' + seconds);
+      if (minutes == 0 && seconds == 0) gameOver();
   }, 1000);
 }
-
+  
 // Answer Button Functions (for questions)
-function startQuiz(){
+function startQuiz() {
     console.log("Button Works!!")
     countdown() 
     startDiv.classList.add("hidden");
@@ -110,18 +106,19 @@ function startQuiz(){
 }
 // referenced: https://www.youtube.com/watch?v=_LYxkClHnV0&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=6
 
-function nextQuestion(event){
+function nextQuestion(event) {
   
     console.log(event.target.textContent == questions[questionCounter].answer)
-    if(event.target.textContent !== questions[questionCounter].answer) {
-    seconds -= 10;
-     }
+    if (event.target.textContent !== questions[questionCounter].answer) {
+        seconds -= 10;
+    }
      
     questionCounter++;
     if (questionCounter == questions.length) {
         gameOver();
         return
-       }
+    }
+   
     questionEl.textContent = questions[questionCounter].question
     buttonA.textContent = questions[questionCounter].choices[0]
     buttonB.textContent = questions[questionCounter].choices[1]
@@ -129,113 +126,54 @@ function nextQuestion(event){
     buttonD.textContent = questions[questionCounter].choices[3]
 }
 
-// Check Answers
-// referenced: https://codereview.stackexchange.com/questions/119804/answer-checking-script
-// referenced: https://www.youtube.com/watch?v=49pYIMygIcU
-
-
-
 // Game Over function
 function gameOver() {
     end.classList.remove("hidden");
     questionDiv.classList.add("hidden");
     clearInterval(interval);
     finalUserScore.textContent = score;
-    // if (submitButton.event + "click") {
-    //     highScores();
-    // }
 }
 
-// High Score
-// function saveScore(event){
-//     var data = {
-//         initials: initials,
-//         score: score
-//     }
-//     highScores.push(data)
-//     localStorage.setItem("highScores", JSON.stringify(highScores))
-// } 
-
-// var highScores = []
-
-
-
-
-
-function highScores(){
+// High Scores
+function highScores() {
     if (submitButton.event)
     // console.log("Button Works!!")
-    // countdown() 
-    end.classList.add("hidden");
-    scoreContainer.classList.remove("hidden");
-}
-
-// function highScores() {
-//     scoreContainer.classList.remove("hidden");
-    // end.classList.add("hidden");
-    // questionDiv.classList.add("hidden");
-// };
-
-// Initials and score saved to local storage
-// referenced: 22-Stu_Local-Storage Lesson/Code
-// function renderLastRegistered() {
-// var initials = localStorage.getItem("initials");
-// var lastScore = localStorage.getItem("score");
-// userEmailSpan.textContent = lastEmail;
-// userPasswordSpan.textContent = lastScore;
-// }
-
-// submitButton.addEventListener("click", function(event) {
-//   event.preventDefault();
-
-//   var initials = document.querySelector("#initials").value;
-// //   var finalScore = document.querySelector("#finalScore").value;
-
-//   if (initials === "") {
-//     displayMessage("error", "Initials cannot be blank");
-// //   } else if (password === "") {
-// //     displayMessage("error", "Password cannot be blank");
-//   } else {
-//     displayMessage("success", "Registered successfully");
-
-//   // Save initials and final score to localStorage and render the last registered user
-//   localStorage.setItem("initials", initials);
-//   localStorage.setItem("finalScore", finalScore);renderLastRegistered()
-//   }
-// });
-
-
-// Event Listener
-// var clearScores = "";
-
-startButton.addEventListener("click", startQuiz)
-buttonA.addEventListener("click", nextQuestion)
-buttonB.addEventListener("click", nextQuestion)
-buttonC.addEventListener("click", nextQuestion)
-buttonD.addEventListener("click", nextQuestion)
-
-// goBackButton.addEventListener("click", startQuiz)
-// clearHighScoresButton.addEventListener("click", clearScores)
-submitButton.addEventListener("click", saveScore)
+        end.classList.add("hidden");
+        scoreContainer.classList.remove("hidden");
+    }
 
 function saveScore() {
     console.log(score)
+    console.log(initials)
 var data = {
     initials:initials.value,
     score:score
 } 
+
 userScore.push(data)
 localStorage.setItem("userScore", JSON.stringify(userScore))
 scoreContainer.classList.remove("hidden");
 end.classList.add("hidden");
 questionDiv.classList.add("hidden");
+
 for (let i = 0; i < userScore.length; i++) {
-   var li = document.createElement("li") 
+    var li = document.createElement("li") 
     li.textContent = userScore[i].initials + ": " + userScore[i].score
     scoreList.appendChild(li)
     }
 }
 
 var userScore = JSON.parse(localStorage.getItem("userScore"))||[]
+
+// Event Listeners
+startButton.addEventListener("click", startQuiz)
+buttonA.addEventListener("click", nextQuestion)
+buttonB.addEventListener("click", nextQuestion)
+buttonC.addEventListener("click", nextQuestion)
+buttonD.addEventListener("click", nextQuestion)
+submitButton.addEventListener("click", saveScore)
+
+
+
 
 

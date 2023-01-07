@@ -18,13 +18,9 @@
 <body>
   <div class="card">
     <div class="wrapper">
-        
         <!-- Display the countdown timer in an element -->
         <!-- https://www.w3schools.com/howto/howto_js_countdown.asp -->
-
-        <a href="TBD">View High Scores</a>
-        <!-- <div class="topcorner"><a href="TBD">timer</a></div> -->
-        <!-- <p class="topcorner" id="timer"></p> -->
+        <a href="score.html">View High Scores</a>
         <div id="start-div">
           <header>
             <h1>Coding Quiz Challenge</h1>
@@ -48,46 +44,31 @@
               <button class="btn" id="choiceC" value="C">C</button>
               <button class="btn" id="choiceD" value="D">D</button>
             </div>
-            <!-- <div>
-              <textarea readonly id="highScores" placeholder="Correct-Incorrect">Correct-Incorrect</textarea> 
-            </div> -->
         </section>
-            <!-- <section class="hidden" id="answerCheck">
-              <p>Correct or Incorrect</p>
-            </section> -->
             <!-- Game Over Slide/Page -->
             <section class="hidden" id="end">
                 <h1>Game Over!</h1>
                 <p>Your Final Score: <span id="finalScore"></span></p>
-                <!-- <p>Enter Initials:</p> -->
-                <!-- referenced: 22-Stu_Local-Storage Lesson/Code -->
-                <!-- <form method="POST"> -->
                   <div class="input-group">
                     <label for="initials">Enter Your Intials: </label>
                     <input type="text" name="initials" id="initials" placeholder="your initials" />
                   </div>
                 <button class="btn" id="submit">Submit</button>
             </section>
-               <!-- High Score Slide/Page -->
+            <!-- High Score Slide/Page -->
             <section class="hidden" id="scoreContainer">
               <header>
-                <!-- <h1 id="highScores">High Scores</h1> -->
                 <h1>High Scores</h1>
               </header> 
               <div>
                 <textarea readonly id="userScore" placeholder="Initials - Score">Initials - Score</textarea> 
                 <ul id="scoreList"></ul>
               </div>
-              <div class="flexbox-container-2">
-                <button class="btn" id="goBack">Go Back</button>
-                <button class="btn" id="clearHighScores">Clear High Scores</button>
-              </div>
           </section>
-            
-  
+          <!-- Timer -->
           <div class="card-footer">
             <p>Time: <span class="js-timeout">1:30</span></p>
-            <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
+          <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
           </div>
     </div>
   </div>
