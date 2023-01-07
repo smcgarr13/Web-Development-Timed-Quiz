@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Quiz | Web Development Basics</title>
+    <link rel="stylesheet" media="max-width: 1118px" href="./assets/css/style.css" />
+    <link rel="stylesheet" media="max-width: 440px" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Questrial&family=Quicksand&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Koulen&family=Lexend+Exa:wght@500&display=swap">
+</head>
+<body>
+    <div class="card">
+        <div class="wrapper">
+        <!-- High Score Slide/Page -->
+            <section id="scoreContainer">
+              <header>
+                <h1>High Scores</h1>
+              </header> 
+              <div>
+                <textarea readonly id="userScore" placeholder="Initials - Score">Initials - Score</textarea> 
+                <ul id="scoreList"></ul>
+              </div>
+              <div class="flexbox-container-2">
+                <button class="btn" id="goBack"><a href="index.html">Go Back</a></button>
+              </div>
+
+          </section>
+  
+          <div class="card-footer">
+            <p>Time: <span class="js-timeout">1:30</span></p>
+            <!-- referenced: https://codepen.io/TLJens/pen/azedap -->
+          </div>
+    </div>
+  </div>
+
+<script src="assets/js/script.js"></script>    
+</body>
+</html>
