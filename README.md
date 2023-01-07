@@ -1,4 +1,4 @@
-# module-4-challenge: Web-Development-Timed-Quiz
+# Module-4-Challenge: Web-Development-Timed-Quiz
 Build a timed quiz on JavaScript fundamentals that stores high scores.
 
 ## Description
