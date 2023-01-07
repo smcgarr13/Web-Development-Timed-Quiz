@@ -1,4 +1,3 @@
-
 // Set-up global variables
 var startButton = document.querySelector("#quiz-button")
 var startDiv = document.querySelector("#start-div")
@@ -32,7 +31,6 @@ var seconds = 30;
 var interval;
 
 var scoreList = document.querySelector("#scoreList")
-
 
 // Questions
 let questions = [
@@ -172,8 +170,3 @@ buttonB.addEventListener("click", nextQuestion)
 buttonC.addEventListener("click", nextQuestion)
 buttonD.addEventListener("click", nextQuestion)
 submitButton.addEventListener("click", saveScore)
-
-
-
-
-
